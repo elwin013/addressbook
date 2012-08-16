@@ -13,13 +13,14 @@ Help
 ----
 
 Syntax: addressbook.pl action [ID/KEYWORD]
- * help            - view this help
- * list            - list all records
- * view ID         - show record with specified ID
- * add             - add new record (interactive)
- * edit ID         - edit record with specified ID (interactive)
- * del ID          - delete record with specified ID
- * search KEYWORD  - search a KEYWORD in database and show results
+
+  * help - view this help
+  * list - list all records
+  * view ID - show record with specified ID
+  * add - add new record (interactive)
+  * edit ID - edit record with specified ID (interactive)
+  * del ID - delete record with specified ID
+  * search KEYWORD - search a KEYWORD in database and show results
   
 
 License
