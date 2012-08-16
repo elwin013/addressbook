@@ -213,7 +213,7 @@ sub main {
     case "del"    { &del($parameter); }
     case "list"   { &list; }
     case "search" { &search($parameter); }
-    else { print "Not enough or wrong parameters. Look $0 help\n" }
+    else { &msg("Not enough or wrong parameters. Look $0 help"); }
   }
 }
 

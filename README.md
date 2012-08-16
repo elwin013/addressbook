@@ -12,7 +12,7 @@ Required Perl modules
 Help
 ----
 
-Syntax: addressbook.pl action [ID/KEYWORD]
+Syntax: ./addressbook.pl action [ID/KEYWORD]
 
   * help - view this help
   * list - list all records
