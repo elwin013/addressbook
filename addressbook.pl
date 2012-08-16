@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 # Copyright (c) 2012, Kamil "elwin013" Banach
 # Permission to use, copy, modify, and/or distribute this software for 
 # any purpose with or without fee is hereby granted, provided that the 
@@ -30,7 +30,6 @@ sub by_id {               # sort subroutine
 }; 
 
 sub msg { print colored ['bold'], "=> "; print "@_\n"; }
-
 sub openInput { open IN, "<", $DB or die "I can't open file $DB: $!"; }
 
 sub help {
@@ -96,6 +95,34 @@ sub getLastID {           # Get an last record ID from file
   close IN;
 }
 
+sub saveRecord {
+  open OUT, ">>", $DB or die "I can't open file $_: $!";
+  print OUT $_[0]."\n";
+  close OUT;
+  &sort;
+}
+
+sub removeRecord {        # Return a db without record with some ID
+  &openInput;
+  my $wantedID = $_[0];
+  my @lines = ();
+  while(<IN>) {
+    /^[0-9]+/;
+    if($& == $wantedID) { next; }
+    push @lines, $_;
+  }
+  close IN;
+  @lines;
+}
+
+sub saveRecordsToFile {   # Save records to file
+  my @lines = @_;
+  open OUT, ">", $DB or die "I can't open file $DB: $!";
+  @lines = &resetCounter(@lines);
+  foreach (reverse @lines) { print OUT $_; }
+  close OUT; 
+}
+
 sub view {                # View a record
   my($id, $name, $nick, $email, $phones, $im, $address, $notes) = &getByID($_[0]);
   my $record = "";
@@ -123,34 +150,6 @@ sub add {                 # Interactive adding record
   my $record = join ";", ($id, @values);
   &saveRecord($record);
   &msg("Record added with ID $id");
-}
-
-sub saveRecord {
-  open OUT, ">>", $DB or die "I can't open file $_: $!";
-  print OUT $_[0]."\n";
-  close OUT;
-  &sort;
-}
-
-sub removeRecord {        # Return a db without record with some ID
-  &openInput;
-  my $wantedID = $_[0];
-  my @lines = ();
-  while(<IN>) {
-    /^[0-9]+/;
-    if($& == $wantedID) { next; }
-    push @lines, $_;
-  }
-  close IN;
-  @lines;
-}
-
-sub saveRecordsToFile {   # Save records to file
-  my @lines = @_;
-  open OUT, ">", $DB or die "I can't open file $DB: $!";
-  @lines = &resetCounter(@lines);
-  foreach (reverse @lines) { print OUT $_; }
-  close OUT; 
 }
 
 sub del {
@@ -218,8 +217,7 @@ sub main {
   }
 }
 
-
-{ unless(-e $DB) { 
+{ unless(-e $DB) {        # Is database file exist?
   open OUT, ">", $DB or die "I can't open file $DB: $!"; 
   close OUT; } }
 &main;
