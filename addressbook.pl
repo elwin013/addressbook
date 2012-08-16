@@ -98,7 +98,6 @@ sub getLastID {           # Get an last record ID from file
 
 sub view {                # View a record
   my($id, $name, $nick, $email, $phones, $im, $address, $notes) = &getByID($_[0]);
-  #~ foreach ($notes, $address) { s/\\n/\n    /g if $_; }
   my $record = "";
   &msg("Begin record #${id}");
   $record .= "$fields[0]: $name\n"          if $name;
