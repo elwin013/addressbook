@@ -89,7 +89,7 @@ sub getByID {             # Get an record from file
 sub getLastID {           # Get an last record ID from file 
   &openInput;
   my $_ = <IN>;
-  if ($_ eq "") { $_ = 0; }
+  unless ($_) { $_ = 0; }
   /^[0-9]+/;
   return $&;
   close IN;
@@ -194,7 +194,7 @@ sub edit {              # Interactive editing files
     chomp($values[$_] = <STDIN>);
   }
   foreach (0..6) {
-    unless ($values[$_]) { $oldValues[$_] = $values[$_]; }
+    if ($values[$_] eq "") { $values[$_] = $oldValues[$_]; }
   }
   my @lines = &removeRecord($wantedID);
   my $record = join ";", ($id, @values);
