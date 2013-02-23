@@ -13,7 +13,6 @@
 # OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 use strict;
-use warnings;
 use Switch;
 use Term::ANSIColor qw / colored /;
 use File::Spec::Functions qw/ catfile /;
