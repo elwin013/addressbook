@@ -1,4 +1,4 @@
-adressbook.pl
+adressbook
 =============
 
 A simple (or not) address book with records stored in text file. Written in Perl.
@@ -12,7 +12,7 @@ Required Perl modules
 Help
 ----
 
-Syntax: ./addressbook.pl action [ID/KEYWORD]
+Syntax: ./addressbook action [ID/KEYWORD]
 
   * help - view this help
   * list - list all records
